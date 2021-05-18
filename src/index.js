@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
-// import './custom.scss';
 import 'antd/dist/antd.css';
 import App from './App';
 
