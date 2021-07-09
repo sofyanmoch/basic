@@ -27,27 +27,33 @@ function HomeComponent() {
     });
   };
 
-  function subtraction(arr) 
- {
-  var total = arr[0];
-    if (typeof (total) !== 'number') {
-      return false;
+    function subtraction(arr, n) {
+      let result = arr[0].value;
+      for (var i = 1; i < n; i++) {
+          result -= arr[i].value;
+      }
+      return result
     }
-    for (var i = 1, length = arr.length; i < length; i++)
-    {
-      if (typeof (arr[i]) === 'number')
-      {
-        total -= arr[i];
-      } 
-      else 
-      return false;
+
+    function multiply(arr, n) {
+      let result = 1;
+      for (var i = 0; i < n; i++) {
+          result *= arr[i].value;
+      }
+      return result
     }
-    return total;
-  }
+
+    function division(arr, n) {
+      let result = arr[0].value;
+      for (var i = 1; i < n; i++) {
+          result /= arr[i].value;
+      }
+      return result
+    }
+
 
   function checkList(value, index){
     valueInput[index].isCheck = value
-    console.log(valueInput)
   }
 
   function changeInput(value, index){
@@ -55,34 +61,30 @@ function HomeComponent() {
   }
 
   function operatorClicked(type) {
-    console.log(valueInput, 'value input')
     const resultFilter = valueInput.filter((datas) => {
       return datas.isCheck
     })
     if (resultFilter === [] || resultFilter.length < 2) {
       openNotification()
     } else {
-      console.log(resultFilter, 'res fil')
       switch(type) {
         case 'plus':
           var result = resultFilter.reduce(function(tot, arr) { 
-            // return the sum with previous value
             return tot + arr.value;
-          
-            // set initial value as 0
           },0);
-          console.log(result)
           setResult(result)
           break;
         case 'minus':
-          const resultSubstricion = subtraction(resultFilter)
-          console.log(resultSubstricion, 'result')
+          const resultSUbstraction = subtraction(resultFilter, resultFilter.length)
+          setResult(resultSUbstraction)
           break;
         case 'multiply':
-          // code block
+          const multiplyResult = multiply(resultFilter, resultFilter.length)
+          setResult(multiplyResult)
           break;
         case 'division':
-          // code block
+          const divisionResult = division(resultFilter, resultFilter.length)
+          setResult(divisionResult)
           break;
         default:
           // code block
