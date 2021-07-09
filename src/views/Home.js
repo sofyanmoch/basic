@@ -45,9 +45,17 @@ function HomeComponent() {
 
     function division(arr, n) {
       let result = arr[0].value;
-      for (var i = 1; i < n; i++) {
+      let filterZero = arr.filter((v, i) => {
+        return v.value === 0
+      })
+      // handle when any value === 0
+      if (filterZero.length > 0) {
+        result = 0
+      } else {
+        for (var i = 1; i < n; i++) {
           result /= arr[i].value;
       }
+      } 
       return result
     }
 
@@ -100,7 +108,7 @@ function HomeComponent() {
           {valueInput.map((datas, index) => (
             <div className="row col-lg-4 mt-2">
               <div className="col-10 ">
-                <Input onChange={(event) => changeInput(event.target.value, index)} />
+                <Input defaultValue={0} onChange={(event) => changeInput(event.target.value, index)} />
               </div>
               <div className="col-2">
                 <Checkbox className='pt-1' onClick={(event) => checkList(event.target.checked, index)} />
@@ -126,7 +134,7 @@ function HomeComponent() {
 
           {/* Result Section*/}
           <div className="d-flex justify-content-between col-lg-3 mx-3 mt-2">
-            <h5>Hasil</h5>
+            <h5>Hasil :</h5>
             <h5 className="mr-3">{result}</h5>
           </div>
         </div>
